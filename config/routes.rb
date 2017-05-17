@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :team_requests
   get 'omniauth_callbacks/twitter'
 
   devise_for :users,

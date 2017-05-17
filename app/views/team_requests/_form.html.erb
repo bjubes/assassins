@@ -1,0 +1,32 @@
+<%= form_with(model: team_request, local: true) do |form| %>
+  <% if team_request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(team_request.errors.count, "error") %> prohibited this team_request from being saved:</h2>
+
+      <ul>
+      <% team_request.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :sender_id %>
+    <%= form.number_field :sender_id, id: :team_request_sender_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :reciever_id %>
+    <%= form.number_field :reciever_id, id: :team_request_reciever_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :team_id %>
+    <%= form.number_field :team_id, id: :team_request_team_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

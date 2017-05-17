@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Sender:</strong>
+  <%= @team_request.sender_id %>
+</p>
+
+<p>
+  <strong>Reciever:</strong>
+  <%= @team_request.reciever_id %>
+</p>
+
+<p>
+  <strong>Team:</strong>
+  <%= @team_request.team_id %>
+</p>
+
+<%= link_to 'Edit', edit_team_request_path(@team_request) %> |
+<%= link_to 'Back', team_requests_path %>

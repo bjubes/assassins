@@ -1,6 +1,9 @@
 class User < ApplicationRecord
 
-  belongs_to :team
+  belongs_to :team, required: false
+  has_many :team_requests, class_name: "TeamRequest", foreign_key: "sender_id", dependent: :destroy
+  has_many :team_requests, class_name: "TeamRequest", foreign_key: "reciever_id", dependent: :destroy
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
