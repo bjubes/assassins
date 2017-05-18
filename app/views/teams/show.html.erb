@@ -7,7 +7,7 @@
 </ul>
 
 <% if @team.users.count < 2 %>
-<%= link_to 'Add User to Team', '#' %> |
+<%= link_to 'Add User to Team', new_team_request_path %> |
 
 <% end %>
 <%= link_to 'Edit', edit_team_path(@team) %> |
