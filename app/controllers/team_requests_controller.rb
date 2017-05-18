@@ -1,10 +1,12 @@
 class TeamRequestsController < ApplicationController
   before_action :set_team_request, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /team_requests
   # GET /team_requests.json
   def index
-    @team_requests = TeamRequest.all
+    @invites = TeamRequest.where(reciever: current_user, status: TeamRequest.statuses[:pending])
+    @sent = TeamRequest.where(sender: current_user)
   end
 
   # GET /team_requests/1
@@ -24,8 +26,9 @@ class TeamRequestsController < ApplicationController
   # POST /team_requests
   # POST /team_requests.json
   def create
-    @team_request = TeamRequest.new(team_request_params)
-
+      @team_request = TeamRequest.new(sender: current_user,
+                                      reciever_id: team_request_params[:reciever_id],
+                                      team: current_user.team)
     respond_to do |format|
       if @team_request.save
         format.html { redirect_to @team_request, notice: 'Team request was successfully created.' }
@@ -54,10 +57,40 @@ class TeamRequestsController < ApplicationController
   # DELETE /team_requests/1
   # DELETE /team_requests/1.json
   def destroy
-    @team_request.destroy
-    respond_to do |format|
-      format.html { redirect_to team_requests_url, notice: 'Team request was successfully destroyed.' }
-      format.json { head :no_content }
+    if @team_request.status != "pending"
+      flash[:notice] = "could not delete team request."
+      redirect_to action: "index"
+    else
+      @team_request.destroy
+      respond_to do |format|
+        format.html { redirect_to team_requests_url, notice: 'Team request was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    end
+  end
+
+  def accept
+    @team_request = TeamRequest.find(params[:request_id])
+
+    if @team_request.accept(current_user)
+      #accepted successfully
+      flash[:notice] = "successfully joined '#{@team_request.team.name}'"
+      redirect_to @team_request.team
+    else
+      #error accepting request
+      flash[:error] = "Could not join '#{@team_request.team.name}'."
+
+    end
+  end
+
+  def deny
+    @team_request = TeamRequest.find(params[:request_id])
+    if @team_request.deny(current_user)
+      #accepted successfully
+      flash[:notice] = "Team Request Declined"
+    else
+      #error accepting request
+      flash[:error] = "Error."
     end
   end
 
@@ -67,8 +100,8 @@ class TeamRequestsController < ApplicationController
       @team_request = TeamRequest.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # Only allows reciever_id, the sender and team are inferred from current_user
     def team_request_params
-      params.require(:team_request).permit(:sender_id, :reciever_id, :team_id)
+      params.require(:team_request).permit(:reciever_id)
     end
 end
