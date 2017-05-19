@@ -1,0 +1,10 @@
+<h2><%= @user.username %></h2>
+
+<p>
+  <strong>Team:</strong>
+  <%= link_to @user.team.name, team_path(@user.team) %>
+</p>
+<p>
+  <strong>Status:</strong>
+  <%= @user.alive? ? "Alive" : "Dead" %>
+</p>

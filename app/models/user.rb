@@ -11,6 +11,11 @@ class User < ApplicationRecord
 
   validates :username, presence: true, length: {maximum: 99}, uniqueness: true
 
+  #for conventional purposes only
+  def alive?
+    self.alive
+  end
+
   def self.from_omniauth(auth)
     where(auth.slice(provider: auth.provider, uid: auth.uid)).first_or_create do |user|
       user.provider = auth.provider
