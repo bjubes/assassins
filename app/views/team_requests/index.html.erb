@@ -45,7 +45,7 @@
         <td><%= team_request.team.name %></td>
         <td><%= team_request.status %></td>
         <% if team_request.status == "pending" %>
-          <td><%= button_to 'Rescind', team_request, method: :delete, data: { confirm: 'Rescind Invitation' } %></td>
+          <td><%= button_to 'Rescind', team_request, method: :delete, data: { confirm: 'Rescind Invitation?' } %></td>
         <% end %>
       </tr>
     <% end %>

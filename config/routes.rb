@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  match 'players/:id' => 'players#show', via: [:get]
+  match 'players' =>'players#index', via: [:get]
   resources :team_requests do
     get 'accept'
     get 'deny'

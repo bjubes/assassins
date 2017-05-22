@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170519012025) do
+ActiveRecord::Schema.define(version: 20170522012705) do
+
+  create_table "kills", force: :cascade do |t|
+    t.integer "killer_id"
+    t.integer "victim_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "team_requests", force: :cascade do |t|
     t.integer "sender_id"
