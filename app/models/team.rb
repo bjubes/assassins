@@ -1,6 +1,9 @@
 class Team < ApplicationRecord
   has_many :users
-  has_many :team_requests, foreign_key: "team_id"
+
+  has_many :team_requests, foreign_key: "team_id", dependent: :destroy
+  belongs_to :target, class_name: "Team", foreign_key: "target_id", required: false
+  belongs_to :assassin, class_name: "Team", foreign_key: "assassin_id", required: false
   validates :name, uniqueness: true, presence: true, length: {maximum: 50}
 
   before_destroy :release_users_from_team
