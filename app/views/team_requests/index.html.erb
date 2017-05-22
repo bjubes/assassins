@@ -53,4 +53,6 @@
 </table>
 
 <br>
-<%= link_to "Invite user to #{current_user.team.name}", new_team_request_path %>
+<% if current_user.team %>
+  <%= link_to "Invite user to #{current_user.team.name}", new_team_request_path %>
+<% end %>

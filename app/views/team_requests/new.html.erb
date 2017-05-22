@@ -4,8 +4,7 @@
 
   <div class="field">
     <%= f.label :reciever_id %><br />
-    <%= f.number_field :reciever_id, autofocus: true %>
-  </div>
+<%= f.collection_select :reciever_id, User.order(:username), :id, :username, prompt: "Select User", autofocus: true %>  </div>
   <div class="actions">
     <%= f.submit "Send Request" %>
   </div>
