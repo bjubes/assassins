@@ -8,5 +8,5 @@ class UserTest < ActiveSupport::TestCase
   test "User is valid" do
     assert @user.valid?, true
   end
-  
+
 end

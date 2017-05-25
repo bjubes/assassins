@@ -1,0 +1,2 @@
+module KillConfirmationsHelper
+end

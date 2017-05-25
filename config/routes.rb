@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :kill_confirmations
   match 'players/:id' => 'players#show', via: [:get]
   match 'players' =>'players#index', via: [:get]
   resources :team_requests do

@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Kill Confirmations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Kill</th>
+      <th>Sender</th>
+      <th>Reciever</th>
+      <th>Verdict</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @kill_confirmations.each do |kill_confirmation| %>
+      <tr>
+        <td><%= kill_confirmation.kill_id %></td>
+        <td><%= kill_confirmation.sender_id %></td>
+        <td><%= kill_confirmation.reciever_id %></td>
+        <td><%= kill_confirmation.verdict %></td>
+        <td><%= link_to 'Show', kill_confirmation %></td>
+        <td><%= link_to 'Edit', edit_kill_confirmation_path(kill_confirmation) %></td>
+        <td><%= link_to 'Destroy', kill_confirmation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Kill Confirmation', new_kill_confirmation_path %>

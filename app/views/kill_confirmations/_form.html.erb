@@ -1,0 +1,37 @@
+<%= form_with(model: kill_confirmation, local: true) do |form| %>
+  <% if kill_confirmation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(kill_confirmation.errors.count, "error") %> prohibited this kill_confirmation from being saved:</h2>
+
+      <ul>
+      <% kill_confirmation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :kill_id %>
+    <%= form.number_field :kill_id, id: :kill_confirmation_kill_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sender_id %>
+    <%= form.number_field :sender_id, id: :kill_confirmation_sender_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :reciever_id %>
+    <%= form.number_field :reciever_id, id: :kill_confirmation_reciever_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :verdict %>
+    <%= form.check_box :verdict, id: :kill_confirmation_verdict %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

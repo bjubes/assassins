@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Kill:</strong>
+  <%= @kill_confirmation.kill_id %>
+</p>
+
+<p>
+  <strong>Sender:</strong>
+  <%= @kill_confirmation.sender_id %>
+</p>
+
+<p>
+  <strong>Reciever:</strong>
+  <%= @kill_confirmation.reciever_id %>
+</p>
+
+<p>
+  <strong>Verdict:</strong>
+  <%= @kill_confirmation.verdict %>
+</p>
+
+<%= link_to 'Edit', edit_kill_confirmation_path(@kill_confirmation) %> |
+<%= link_to 'Back', kill_confirmations_path %>
