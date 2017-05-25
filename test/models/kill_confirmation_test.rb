@@ -12,26 +12,29 @@ class KillConfirmationTest < ActiveSupport::TestCase
     @kc.save!
   end
 
-  test "confirmation logic" do
+  test "a confirmed KC can be approved and vetoed" do
     assert_equal @kc.confirmed?, false
 
-    @kc.receiver_accepted = false
-    assert_equal @kc.confirmed?, false
-
-    @kc.receiver_accepted = true
+    @kc.accept!
     assert @kc.confirmed?
 
-    @kc.verdict = false
-    assert_equal @kc.confirmed?, false
-
-    @kc.receiver_accepted = false
-    assert_equal @kc.confirmed?, false
-
-    @kc.verdict = true
+    @kc.approve!
     assert @kc.confirmed?
 
-    @kc.receiver_accepted = false
+    @kc.veto!
+    assert_equal @kc.confirmed?, false
+  end
+
+  test "a denied KC can be vetoed and approved" do
+    @kc.state = :sent
+    @kc.deny!
+    assert_equal @kc.confirmed?, false
+
+    @kc.approve!
     assert @kc.confirmed?
+
+    @kc.veto!
+    assert_equal @kc.confirmed?, false
   end
 
 end

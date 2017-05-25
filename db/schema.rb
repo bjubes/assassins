@@ -10,16 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170525013823) do
+ActiveRecord::Schema.define(version: 20170525220112) do
 
   create_table "kill_confirmations", force: :cascade do |t|
     t.integer "kill_id", null: false
     t.integer "sender_id"
     t.integer "receiver_id"
-    t.boolean "receiver_accepted"
-    t.boolean "verdict"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "confirmation_state"
+    t.string "state"
   end
 
   create_table "kills", force: :cascade do |t|
