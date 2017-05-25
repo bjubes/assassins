@@ -32,4 +32,13 @@
     <% end %>
   </ul>
   <% end %>
+
+  <%if current_user.received_kill_confirmations.count > 0 %>
+   <h3>Pending Confirmations:</h3>
+      <ul>
+      <% current_user.received_kill_confirmations.each do |kc| %>
+        <li><%= link_to kc.kill.to_sentence, kc %></li>
+      <% end %>
+    </ul>
+  <% end %>
 <% end %>
