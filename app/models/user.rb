@@ -19,11 +19,15 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(auth)
-    where(auth.slice(provider: auth.provider, uid: auth.uid)).first_or_create do |user|
+    user = User.find_by(provider: auth.provider, uid: auth.uid)
+    if !user
+      user = User.new
       user.provider = auth.provider
       user.uid = auth.uid
       user.username = auth.info.nickname
+      user.save
     end
+    user
   end
 
   def self.new_with_session(params, session)
@@ -39,5 +43,9 @@ class User < ApplicationRecord
 
   def password_required?
     super && provider.blank?
+  end
+
+  def exists?
+    User.exists?(self.id)
   end
 end
