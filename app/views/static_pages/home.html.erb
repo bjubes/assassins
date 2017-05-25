@@ -14,11 +14,22 @@
 <p>this is the home page</p>
 
 
-<% if current_user && current_user.team && current_user.team.target %>
-  <h3>Targets:</h3>
+<% if current_user && current_user.team%>
+  <strong>Team:</strong> <%= link_to current_user.team.name, current_user.team%>
+  <h3>Teammates:</h3>
   <ul>
-  <% current_user.team.target.users.each do |target| %>
-    <li><%= link_to target.username, player_path(target)%></li>
+  <% current_user.team.users.each do |user| %>
+   <% next if user == current_user %>
+    <li><%= link_to user.username, player_path(user)%></li>
   <% end %>
 </ul>
+
+  <% if current_user.team.target %>
+    <h3>Targets:</h3>
+    <ul>
+    <% current_user.team.target.users.each do |target| %>
+      <li><%= link_to target.username, player_path(target)%></li>
+    <% end %>
+  </ul>
+  <% end %>
 <% end %>

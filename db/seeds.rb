@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 (1..50).each do |i|
   user = User.new
-  user.email = "uniqueEmail#{i}@gmail.com"
+  user.email = "#{i}@gmail.com"
   user.username = "my_username_#{i}"
   user.password = "123456"
   user.password_confirmation = "123456"
