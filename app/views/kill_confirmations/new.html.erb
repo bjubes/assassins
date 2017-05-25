@@ -1,5 +1,20 @@
 <h1>New Kill Confirmation</h1>
 
-<%= render 'form', kill_confirmation: @kill_confirmation %>
+<%= form_for(@kill_confirmation) do |f| %>
+
+<div class="field">
+  <%= f.label :victim_id %><br />
+  <%= f.collection_select :victim_id, current_user.team.target.users.order(:username), :id, :username, prompt: "Select User", autofocus: true %>  </div>
+</div>
+<div class="field">
+  <%= f.label :killer_id %><br />
+  <%= f.collection_select :killer_id, current_user.team.users.order(:username), :id, :username, prompt: "Select User", autofocus: true %> 
+</div>
+
+
+<div class="actions">
+    <%= f.submit "Report Kill" %>
+  </div>
+<% end %>
 
 <%= link_to 'Back', kill_confirmations_path %>

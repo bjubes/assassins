@@ -1,6 +1,6 @@
 class KillConfirmationsController < ApplicationController
   before_action :set_kill_confirmation, only: [:show, :edit, :update, :destroy]
-  before_action authenticate_user!, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :show, :edit, :update, :destroy]
 
   # GET /kill_confirmations/1
   # GET /kill_confirmations/1.json
@@ -19,8 +19,8 @@ class KillConfirmationsController < ApplicationController
   # POST /kill_confirmations
   # POST /kill_confirmations.json
   def create
-    @kill_confirmation = KillConfirmation.new(kill_confirmation_params)
-
+    @kill_confirmation = KillConfirmation.new_without_kill(kill_confirmation_nokill_params) #params[:killer_id], params[:victim_id], params[:creator_is_killer])#kill_confirmation_nokill_params)
+    byebug
     respond_to do |format|
       if @kill_confirmation.save
         format.html { redirect_to @kill_confirmation, notice: 'The Kill was reported.' }
@@ -65,5 +65,9 @@ class KillConfirmationsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def kill_confirmation_params
       params.require(:kill_confirmation).permit(:kill_id, :sender_id, :reciever_id, :verdict)
+    end
+  
+    def kill_confirmation_nokill_params
+      params.require(:kill_confirmation).permit(:killer_id, :victim_id, :creator_is_killer)
     end
 end

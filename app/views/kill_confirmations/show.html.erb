@@ -2,22 +2,22 @@
 
 <p>
   <strong>Kill:</strong>
-  <%= @kill_confirmation.kill_id %>
+  <%= @kill_confirmation.kill.to_sentence %>
 </p>
 
 <p>
-  <strong>Sender:</strong>
-  <%= @kill_confirmation.sender_id %>
+  <strong>Reported By:</strong>
+  <%= @kill_confirmation.sender.username%>
 </p>
 
 <p>
-  <strong>Reciever:</strong>
-  <%= @kill_confirmation.reciever_id %>
+  <strong>Receiver:</strong>
+  <%= @kill_confirmation.receiver.username %>
 </p>
 
 <p>
-  <strong>Verdict:</strong>
-  <%= @kill_confirmation.verdict %>
+  <strong>Confirmed:</strong>
+  <%= @kill_confirmation.confirmed? %>
 </p>
 
 <%= link_to 'Edit', edit_kill_confirmation_path(@kill_confirmation) %> |
