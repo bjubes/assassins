@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170522012705) do
+ActiveRecord::Schema.define(version: 20170525000224) do
 
   create_table "kills", force: :cascade do |t|
     t.integer "killer_id"
@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(version: 20170522012705) do
     t.datetime "updated_at", null: false
     t.boolean "alive", default: true
     t.datetime "hittime"
+    t.integer "target_id"
+    t.integer "assassin_id"
   end
 
   create_table "users", force: :cascade do |t|
