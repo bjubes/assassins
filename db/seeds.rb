@@ -25,9 +25,26 @@ end
 
 (1..25).each do |i|
   team = Team.find(i)
-  team.target_id = (i+1)%25
+  team.target_id = (i+1)%26
+    team.target_id = 1 if team.target_id == 0
   team.assassin_id = (i-1) unless i == 1
   team.save!
 end
 #compelete target loop
 Team.first.update(assassin_id: 25)
+
+#request some kills
+#choose 10 random teams
+(1..25).to_a.shuffle.each do |i|
+  killer = Team.find(i).users.first
+  target = killer.team.target
+  victim_id = target.users.first.id
+  killer_id = killer.id
+
+  k = KillConfirmation.new_without_kill({killer_id: killer_id, victim_id: victim_id})
+  if i % 2 == 0
+    k.accept
+  end
+  k.save!
+
+end
