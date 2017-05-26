@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(version: 20170525220112) do
     t.integer "receiver_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "confirmation_state"
     t.string "state"
   end
 

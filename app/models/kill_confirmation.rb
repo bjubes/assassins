@@ -33,7 +33,7 @@ class KillConfirmation < ApplicationRecord
   end
 
 
-  def self.new_without_kill(params) #killer_id, victim_id, creator_is_killer=true)
+  def self.new_without_kill(params) #killer_id, victim_id, creator_is_killer
     kill = Kill.new
     kill.killer_id = params[:killer_id]
     kill.victim_id = params[:victim_id]

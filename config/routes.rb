@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get 'deny'
   end
   resources :teams
+  resources :kills
 
   get 'omniauth_callbacks/twitter'
   devise_for :users,
