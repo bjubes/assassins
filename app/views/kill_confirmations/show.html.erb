@@ -16,9 +16,18 @@
 </p>
 
 <p>
+  <strong>State:</strong>
+  <%= @kill_confirmation.state %>
+</p>
+
+<p>
   <strong>Confirmed:</strong>
   <%= @kill_confirmation.confirmed? %>
 </p>
 
+<% if current_user == @kill_confirmation.receiver %>
+  <%= button_to 'Accept', {:controller => "kill_confirmations", :action => "accept", :id => @kill_confirmation.id} , :method=>:post  %>
+  <%= button_to 'Deny', {:controller => "kill_confirmations", :action => "deny", :id => @kill_confirmation.id} , :method=>:post  %>
+<% end %>
 <%= link_to 'Edit', edit_kill_confirmation_path(@kill_confirmation) %> |
 <%= link_to 'Back', kill_confirmations_path %>

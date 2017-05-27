@@ -1,6 +1,7 @@
 class KillConfirmationsController < ApplicationController
-  before_action :set_kill_confirmation, only: [:show, :edit, :update, :destroy]
+  before_action :set_kill_confirmation, only: [:show, :edit, :update, :destroy, :accept, :deny, :veto, :approve]
   before_action :authenticate_user!, only: [:new, :show, :edit, :update, :destroy]
+  before_action :deny_unless_receiver, only: [:accept, :deny]
 
   def index
     @kill_confirmations = KillConfirmation.all
@@ -58,6 +59,32 @@ class KillConfirmationsController < ApplicationController
     end
   end
 
+  def accept
+    begin
+      @kill_confirmation.accept!
+        flash[:notice] = "You accepted the kill"
+    rescue
+      flash[:error] = "Could not accept the kill"
+    end
+    redirect_to @kill_confirmation
+  end
+
+  def deny
+    begin
+      @kill_confirmation.deny!
+        flash[:notice] = "You denied the kill"
+    rescue
+      flash[:error] = "Could not deny the kill"
+    end
+    redirect_to @kill_confirmation
+  end
+
+  def veto
+  end
+
+  def approve
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_kill_confirmation
@@ -71,5 +98,12 @@ class KillConfirmationsController < ApplicationController
 
     def kill_confirmation_nokill_params
       params.require(:kill_confirmation).permit(:killer_id, :victim_id, :creator_is_killer)
+    end
+
+    def deny_unless_receiver
+      if current_user != @kill_confirmation.receiver
+        flash[:error] = "You are not the receiver of this confirmation"
+        redirect_to @kill_confirmation
+      end
     end
 end
