@@ -4,15 +4,21 @@
   <strong>Name:</strong>
   <%= @game.name %>
 </p>
-
+<%if current_user == @game.owner%>
+  <p>
+    <strong>Code:</strong>
+    <%= @game.code %>
+  </p>
+<% else %>
 <p>
-  <strong>Code:</strong>
-  <%= @game.code %>
+  <strong>Invite Only:</strong>
+  <%= @game.invite_only? %>
 </p>
+<% end %>
 
 <p>
   <strong>Owner:</strong>
-  <%= @game.owner %>
+  <%= @game.owner.username %>
 </p>
 
 <%= link_to 'Edit', edit_game_path(@game) %> |
