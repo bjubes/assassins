@@ -1,5 +1,6 @@
 class Team < ApplicationRecord
   has_many :users
+  belongs_to :game
 
   has_many :team_requests, foreign_key: "team_id", dependent: :destroy
   belongs_to :target, class_name: "Team", foreign_key: "target_id", required: false
