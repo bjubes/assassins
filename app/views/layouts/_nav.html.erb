@@ -14,7 +14,9 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Home</a></li>
         <li><a href="#">About</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><%= link_to "Teams", teams_path %></li>
+        <li><%= link_to "Kills", kills_path %></li>
+
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -29,9 +31,13 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>
-        <li><a href="../navbar-static-top/">Static top</a></li>
-        <li><a href="../navbar-fixed-top/">Fixed top</a></li>
+      <% if user_signed_in? %>
+        <li>><%= link_to current_user.username, players_path(current_user) %></li>
+        <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+      <% else %>
+        <li><%= link_to "Sign In with Twitter", user_twitter_omniauth_authorize_path %></li>
+        <li> <%= link_to "Sign In", new_user_session_path %></li>
+      <% end %>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container-fluid -->
