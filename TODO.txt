@@ -1,3 +1,4 @@
 TODO:
 
 - require that user has a team before going to team_request#new
+- fix current_user being assumed in /teams

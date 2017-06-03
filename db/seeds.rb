@@ -5,7 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-(1..50).each do |i|
+
+
+(1..51).each do |i|
   user = User.new
   user.email = "#{i}@gmail.com"
   user.username = "my_username_#{i}"
@@ -13,8 +15,17 @@
   user.password_confirmation = "123456"
   user.save!
 end
+
+game = Game.new
+game.name = "game_name"
+game.owner = User.find 51
+game.save!
+
 (1..25).each do |i|
-  Team.create(name: "TEAM_#{i}")
+  team = Team.new
+  team.name = "TEAM_#{i}"
+  team.game = game
+  team.save!
 end
 
 (1..50).each do |i|
@@ -26,7 +37,7 @@ end
 (1..25).each do |i|
   team = Team.find(i)
   team.target_id = (i+1)%26
-    team.target_id = 1 if team.target_id == 0
+  team.target_id = 1 if team.target_id == 0
   team.assassin_id = (i-1) unless i == 1
   team.save!
 end
