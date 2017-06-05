@@ -17,7 +17,9 @@ class User < ApplicationRecord
   validates :username, presence: true, length: {maximum: 99}, uniqueness: true
 
   before_save do 
-    self.game = self.team.game
+    if self.team
+      self.game = self.team.game
+    end
   end
 
   #for conventional purposes only
