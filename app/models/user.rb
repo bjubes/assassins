@@ -16,6 +16,10 @@ class User < ApplicationRecord
 
   validates :username, presence: true, length: {maximum: 99}, uniqueness: true
 
+  before_save do 
+    self.game = self.team.game
+  end
+
   #for conventional purposes only
   def alive?
     self.alive

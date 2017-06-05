@@ -8,7 +8,7 @@ class Team < ApplicationRecord
   validates :name, uniqueness: true, presence: true, length: {maximum: 50}
 
   before_destroy :release_users_from_team
-
+    
   #team.alive should never be called directly, use alive? instead.
   def alive?
     !self.out?
