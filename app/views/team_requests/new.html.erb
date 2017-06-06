@@ -1,13 +1,13 @@
-<h1>Invite User to <%= current_user.team.name%></h1>
-<p>Invite a user to join <%= current_user.team.name%>.</p>
-<%= form_for @team_request, html: {class: "form-horizontal center"} do |f| %>
-
-  <div class="field">
-    <%= f.label :reciever_id %><br />
-<%= f.collection_select :reciever_id, User.order(:username), :id, :username, prompt: "Select User", autofocus: true, class:"form-control" %>  </div>
-  <div class="actions">
-    <%= f.submit "Send Request", class:"btn btn-submit" %>
-  </div>
-<% end %>
-
-<%= link_to 'Back', team_requests_path %>
+<div class="col-md-4 col-centered">
+  <h1>Invite User to <%= current_user.team.name%></h1>
+  <%= form_for @team_request, html: {class: "form-horizontal center"} do |f| %>
+    <div class="form-group">
+    <%= f.label :reciever_id, class: "control-label" %><br />
+    <%= f.collection_select :reciever_id, User.order(:username), :id, :username, {prompt: "Select User"}, {class:"form-control"} %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Send Request", class:"btn btn-default btn-primary pull-right" %>
+      <%= link_to 'Back', team_requests_path, class: "btn btn-default pull-left" %>
+    </div>
+  <% end %>
+</div>

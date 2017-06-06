@@ -5,15 +5,15 @@
 
 <div class="form-group">
   <%= f.label :victim_id, class: "control-label" %><br />
-  <%= f.collection_select :victim_id, current_user.team.target.users.order(:username), :id, :username, {prompt: "Select User"},  {:class => 'form-control'} %> 
+  <%= f.collection_select :victim_id, current_user.team.target.users.order(:username), :id, :username, {prompt: "Select User"},  {:class => 'form-control'} %>
 </div>
 <div class="form-group">
   <%= f.label :killer_id, class: "control-label" %><br />
-  <%= f.collection_select :killer_id, current_user.team.users.order(:username), :id, :username, {prompt: "Select User"},  {:class => 'form-control'} %> 
+  <%= f.collection_select :killer_id, current_user.team.users.order(:username), :id, :username, {prompt: "Select User"},  {:class => 'form-control'} %>
 </div>
 
 <div class="actions">
-  <%= link_to 'Back', kill_confirmations_path %>
-  <%= f.submit "Report Kill", class: "btn btn-default btn-primary pull-left" %>
+  <%= link_to 'Back', kill_confirmations_path, class: "btn btn-default pull-left" %>
+  <%= f.submit "Report Kill", class: "btn btn-default btn-primary pull-right" %>
 </div>
 <% end %>

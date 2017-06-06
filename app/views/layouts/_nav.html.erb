@@ -12,23 +12,10 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><%= link_to "Teams", teams_path %></li>
-        <li><%= link_to "Kills", kills_path %></li>
-
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li class="dropdown-header">Nav header</li>
-            <li><a href="#">Separated link</a></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
+        <li class="<%= 'active' if params[:controller] == 'static_pages'&& params[:action] == 'home' %>"><a href="#">Home</a></li>
+        <li class="<%= 'active' if params[:controller] == 'static_pages' && params[:action] == 'about' %>"><a href="#">About</a></li>
+        <li class="<%= 'active' if params[:controller] == 'teams' %>"><%= link_to "Teams", teams_path %></li>
+        <li class="<%= 'active' if params[:controller] == 'kills' ||  params[:controller] == 'kill_confirmations' %>"><%= link_to "Kills", kills_path %></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
       <% if user_signed_in? %>
@@ -41,10 +28,11 @@
             <li role="separator" class="divider"></li>
             <li class="dropdown-header">Actions</li>
             <li><%= link_to "Report Kill", new_kill_confirmation_path %></li>
-            <li><a href="#">One more separated link</a></li>
+            <li><%= link_to "Invite Player to Team", new_team_request_path %></li>
+
           </ul>
         </li>
-        
+
         <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
       <% else %>
         <li><%= link_to "Sign In with Twitter", user_twitter_omniauth_authorize_path %></li>
