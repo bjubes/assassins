@@ -1,15 +1,16 @@
+<div class="col-md-4 col-centered">
+
 <h1>Editing Team</h1>
 
-<%= form_for(@team) do |f| %>
+<%= form_for @team, html: {class: "form-horizontal center"} do |f| %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true %>
+  <div class="form-group">
+    <%= f.label :name, class: "control-label" %><br />
+    <%= f.text_field :name, class: "form-control" %>
   </div>
   <div class="actions">
-    <%= f.submit "Update Team" %>
+    <%= link_to 'Back', teams_path, class: "btn btn-default pull-left" %>
+    <%= link_to 'Show', @team , class: "btn btn-default pull-left" %>
+    <%= f.submit "Update Team", class: "btn btn-default btn-primary pull-right" %>
   </div>
 <% end %>
-
-<%= link_to 'Show', @team %> |
-<%= link_to 'Back', teams_path %>
