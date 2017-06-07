@@ -1,33 +1,34 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Kills</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Killer</th>
-      <th>Victim</th>
-      <th>Time</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @kills.each do |kill| %>
+<h1>Kills <span class="pull-right"><%= link_to new_kill_confirmation_path, class: "btn btn-default" do %>
+Report a Kill <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+<% end %>
+</span></h1>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= kill.killer.username %></td>
-        <td><%= kill.victim.username %></td>
-        <td><%= kill.kill_time %></td>
-        <td><%= link_to 'Show', kill.kill_confirmation %></td>
-        <% if false %>
-        <td><%= link_to 'Edit', edit_kill_path(kill) %></td>
-        <td><%= link_to 'Destroy', kill, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
+        <th>Killer</th>
+        <th>Victim</th>
+        <th>Time</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
+    <tbody>
+      <% @kills.each do |kill| %>
+        <tr>
+          <td><%= link_to kill.killer.username, player_path(kill.killer) %></td>
+          <td><%= link_to kill.victim.username, player_path(kill.victim) %></td>
+          <td><%= kill.kill_time %></td>
+          <td><%= link_to 'Show', kill.kill_confirmation %></td>
+          <% if false %>
+          <td><%= link_to 'Edit', edit_kill_path(kill) %></td>
+          <td><%= link_to 'Destroy', kill, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 <br>
 
 <%= link_to 'Report a Kill', new_kill_confirmation_path %>

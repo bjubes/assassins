@@ -2,3 +2,8 @@ TODO:
 
 - require that user has a team before going to team_request#new
 - fix current_user being assumed in /teams
+
+- change kill_confirmation/ so that it shows only kills where you were either the killer or vicitm
+  - if you are the owner, you can see everything.
+
+- wrap all tables in <div class="table-responsive"> to make them responsive
