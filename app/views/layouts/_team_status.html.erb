@@ -1,0 +1,17 @@
+<p>
+  <strong>Status:</strong>
+  <span class="label label-<%= boostrap_color_from_status team.status%>"><%= team.status.capitalize %></span>
+</p>
+<% if team.status != "alive" %>
+  <p>
+    <strong>Hit:</strong>
+    <%= time_ago_in_words team.hittime %> ago.
+  </p>
+  <p>
+    <strong>By:</strong> <%=link_to team.assassin.name, team.assassin %>
+    <ul>
+    <% team.assassin.users.each do |user| %>
+    <li><%= link_to user.username, player_path(user) %></li>
+    <% end %>
+    </ul>
+<% end %>

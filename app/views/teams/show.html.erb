@@ -7,24 +7,9 @@
 <% end %>
 </ul>
 
-<% status = @team.status %>
-<p>
-  <strong>Status:</strong>
-  <span class="label label-<%= boostrap_color_from_status status%>"><%= status.capitalize %></span>
-</p>
-<% if status == "endangered" %>
-  <p>
-    <strong>Hit:</strong>
-    <%= time_ago_in_words @team.hittime %> ago.
-  </p>
-  <p>
-    <strong>By:</strong> <%=link_to @team.assassin.name, @team.assassin %>
-    <ul>
-    <% @team.assassin.users.each do |user| %>
-    <li><%= link_to user.username, player_path(user) %></li>
-    <% end %>
-    </ul>
-<% end %>
+<%= render 'layouts/team_status', team: @team %>
+
+
 <p>
 <% if current_user.team == @team %>
   <% if @team.users.count < 2 %>
