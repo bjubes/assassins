@@ -1,11 +1,19 @@
 module ApplicationHelper
   def authenticate_admin
-    !authenticate_user
+    authenticate_user!
     raise Error("not done doing this...")
     #if !current_user.
       flash[:error] = "You are not authorized to do that"
       redirect_to current_user
 
+  end
+
+  def ensure_user_has_game
+    authenticate_user!
+    unless current_user.game
+      flash[:error] = "You must join or create a game first."
+      redirect_to games_path
+    end
   end
 
   def boostrap_color_from_status(status)

@@ -23,8 +23,8 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.username %><span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><%= link_to "my page", player_path(current_user) %></li>
-            <li><%= link_to current_user.team.name, current_user.team %></li>
-            <li><%= link_to current_user.game.name, current_user.game %></li>
+            <li><%= (link_to current_user.team.name, current_user.team) unless !current_user.team %></li>
+            <li><%= (link_to current_user.game.name, current_user.game)  unless !current_user.game %></li>
             <li role="separator" class="divider"></li>
             <li class="dropdown-header">Actions</li>
             <li><%= link_to "Report Kill", new_kill_confirmation_path %></li>

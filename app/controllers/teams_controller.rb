@@ -1,11 +1,13 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only:[:edit, :update, :destroy, :new, :create]
+  include ApplicationHelper
 
+  before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:index, :edit, :update, :destroy, :new, :create]
+  before_action :ensure_user_has_game, only: [:index, :edit, :update, :destroy, :new, :create]
   # GET /teams
   # GET /teams.json
   def index
-    @teams = Team.all
+      @teams = Team.where(:game_id == current_user.game_id)
   end
 
   # GET /teams/1
@@ -57,6 +59,7 @@ class TeamsController < ApplicationController
   # DELETE /teams/1
   # DELETE /teams/1.json
   def destroy
+    #TODO: only team members and admin should be able to do this
     @team.destroy
     respond_to do |format|
       format.html { redirect_to teams_url, notice: 'Team was successfully destroyed.' }
