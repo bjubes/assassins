@@ -12,14 +12,19 @@
 <% else %>
 <p>
   <strong>Invite Only:</strong>
-  <%= @game.invite_only? %>
+  <%= (bool_to_yn @game.invite_only?).capitalize %>
 </p>
 <% end %>
 
 <p>
   <strong>Owner:</strong>
-  <%= @game.owner.username %>
+  <%= link_to @game.owner.username, player_path(@game.owner)%>
+</p>
+
+<p>
+  <strong>Players:</strong>
+  <%= @game.users.count %>
 </p>
 
 <%= link_to 'Edit', edit_game_path(@game) %> |
-<%= link_to 'Back', games_path %>
+<%= back_link %>

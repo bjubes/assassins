@@ -9,3 +9,22 @@
 .form-horizontal .control-label {
   text-align: left;
 }
+
+ .input-group > .form-button {
+  cursor: pointer;
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+
+}
+
+.form-button:hover .form-button:focus, .form-button.focus {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+.form-button:active, .form-button.active {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}

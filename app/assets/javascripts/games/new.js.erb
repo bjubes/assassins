@@ -1,0 +1,13 @@
+$( document ).ready(function() {
+    $("#gen-code").click(function(){
+      $("#code-field").val(randomGameCode())
+    })
+});
+
+function randomGameCode(length=6) {
+   var text = "";
+   var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    for( var i=0; i < length; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    return text
+}
