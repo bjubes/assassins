@@ -1,17 +1,8 @@
-<ul>
-  <%if user_signed_in?%>
-    <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
-    <p>Welcome, <%= current_user.username%>. ID: <%= current_user.id %>
-  <%else%>
-    <%= link_to "Sign In", new_user_session_path %>
-    <%= link_to "Sign Up", new_user_registration_path %>
-    <%= link_to "Sign in with Twitter", user_twitter_omniauth_authorize_path %>
 
-  <%end%>
-</ul>
-
+<%if user_signed_in?%>
+<p>Welcome, <%= current_user.username%>. ID: <%= current_user.id %></p>
+<% end %>
 <h1>Assassins</h1>
-<p>this is the home page</p>
 
 
 <% if current_user && current_user.team%>
