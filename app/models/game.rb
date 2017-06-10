@@ -5,8 +5,9 @@ class Game < ApplicationRecord
   has_many :teams
   before_destroy :release_users_from_game
 
-  before_create do
+  after_save do
       self.owner.game = self
+      self.owner.save!
     end
 
   def invite_only?
