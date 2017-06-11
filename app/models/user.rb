@@ -16,7 +16,7 @@ class User < ApplicationRecord
 
   validates :username, presence: true, length: {maximum: 99}, uniqueness: true
 
-  before_save do 
+  before_save do
     if self.team
       self.game = self.team.game
     end
@@ -57,4 +57,14 @@ class User < ApplicationRecord
   def exists?
     User.exists?(self.id)
   end
+
+  def sent_team_requests
+    TeamRequest.where(sender: self)
+  end
+
+  def recieved_team_requests
+    TeamRequest.where(reciever: self, status: TeamRequest.statuses[:pending])
+  end
+
+
 end

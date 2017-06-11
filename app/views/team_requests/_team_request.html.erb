@@ -1,0 +1,7 @@
+<tr>
+    <td><%= link_to team_request.sender.username, player_path(team_request.sender) %></td>
+    <td><%= link_to team_request.team.name, team_request.team %></td>
+    <td><%= button_to 'Accept', {:controller => "team_requests", :action => "accept", :request_id => team_request.id} , :method=>:post, class:"btn btn-default btn-sm"  %></td>
+
+    <td><%= button_to 'Deny', {:controller => "team_requests", :action => "deny", :request_id => team_request.id} , :method=>:post, class:"btn btn-default btn-sm"  %></td>
+</tr>

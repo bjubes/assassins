@@ -5,8 +5,8 @@ class TeamRequestsController < ApplicationController
   # GET /team_requests
   # GET /team_requests.json
   def index
-    @invites = TeamRequest.where(reciever: current_user, status: TeamRequest.statuses[:pending])
-    @sent = TeamRequest.where(sender: current_user)
+    @invites = current_user.recieved_team_requests
+    @sent = current_user.sent_team_requests
   end
 
   # GET /team_requests/1

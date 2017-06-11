@@ -1,0 +1,25 @@
+<p>Welcome, <%= current_user.username%>. ID: <%= current_user.id %></p>
+<div class="col-md-8 col-centered">
+  <h3>Time to join a team!</h3>
+  <% if current_user.recieved_team_requests.count > 0 %>
+  <br>
+    <p>You've been invited to join a team!</p>
+    <table>
+      <thead>
+        <tr>
+          <th>By</th>
+          <th>Team</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% current_user.recieved_team_requests.each do |team_request| %>
+          <%= render team_request %>
+      <% end %>
+      </tbody>
+    </table>
+    <p>or</p>
+  <% end %>
+  <%= link_to "Create a Team!", new_team_path, class: "btn btn-default btn-lg" %>
+</div>

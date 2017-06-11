@@ -13,46 +13,41 @@
 
   <tbody>
     <% @invites.each do |team_request| %>
-      <tr>
-        <td><%= team_request.sender.username %></td>
-        <td><%= team_request.team.name %></td>
-        <td><%= button_to 'Accept', {:controller => "team_requests", :action => "accept", :request_id => team_request.id} , :method=>:post  %></td>
-
-        <td><%= button_to 'Deny', {:controller => "team_requests", :action => "deny", :request_id => team_request.id} , :method=>:post  %></td>
-      </tr>
+      <%= render team_request %>
     <% end %>
   </tbody>
 </table>
 
 <br>
+<%if current_user.team %>
+  <h1>Sent</h1>
 
-<h1>Sent</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>To</th>
-      <th>Team</th>
-      <th>Status</th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @sent.each do |team_request| %>
+  <table>
+    <thead>
       <tr>
-        <td><%= team_request.reciever.username %></td>
-        <td><%= team_request.team.name %></td>
-        <td><%= team_request.status %></td>
-        <% if team_request.status == "pending" %>
-          <td><%= button_to 'Rescind', team_request, method: :delete, data: { confirm: 'Rescind Invitation?' } %></td>
-        <% end %>
+        <th>To</th>
+        <th>Team</th>
+        <th>Status</th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
-<% if current_user.team %>
-  <%= link_to "Invite user to #{current_user.team.name}", new_team_request_path %>
+    <tbody>
+      <% @sent.each do |team_request| %>
+        <tr>
+          <td><%= team_request.reciever.username %></td>
+          <td><%= team_request.team.name %></td>
+          <td><%= team_request.status %></td>
+          <% if team_request.status == "pending" %>
+            <td><%= button_to 'Rescind', team_request, method: :delete, data: { confirm: 'Rescind Invitation?' } %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+  <% if current_user.team %>
+    <%= link_to "Invite user to #{current_user.team.name}", new_team_request_path %>
+  <% end %>
 <% end %>
