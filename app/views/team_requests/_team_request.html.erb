@@ -1,7 +1,10 @@
 <tr>
     <td><%= link_to team_request.sender.username, player_path(team_request.sender) %></td>
     <td><%= link_to team_request.team.name, team_request.team %></td>
-    <td><%= button_to 'Accept', {:controller => "team_requests", :action => "accept", :request_id => team_request.id} , :method=>:post, class:"btn btn-default btn-sm"  %></td>
-
-    <td><%= button_to 'Deny', {:controller => "team_requests", :action => "deny", :request_id => team_request.id} , :method=>:post, class:"btn btn-default btn-sm"  %></td>
+    <td><span>
+    <% #if show %>
+      <%= button_to 'View', {:controller => "team_requests", :action => "show", :id => team_request.id} , :method=>:get, class:"btn btn-default btn-sm btn-left"  %>
+    <% #end %>
+    <%= button_to 'Accept', {:controller => "team_requests", :action => "accept", :request_id => team_request.id} , :method=>:post, class:"btn btn-default btn-sm btn-left"  %>
+    <%= button_to 'Deny', {:controller => "team_requests", :action => "deny", :request_id => team_request.id} , :method=>:post, class:"btn btn-default btn-sm btn-left"  %></span></td>
 </tr>

@@ -10,6 +10,13 @@
   text-align: left;
 }
 
+.btn-left {
+  float:left;
+  margin-left : 1em;
+}
+.btn-right {
+  float:right;
+}
  .input-group > .form-button {
   cursor: pointer;
   color: #333;
@@ -27,4 +34,8 @@
     color: #333;
     background-color: #e6e6e6;
     border-color: #adadad;
+}
+
+p.lg {
+     font-size: 15px;
 }

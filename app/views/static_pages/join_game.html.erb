@@ -1,6 +1,8 @@
 <p>Welcome, <%= current_user.username%>. ID: <%= current_user.id %></p>
 <div class="col-md-8 col-centered">
   <h3>You haven't joined a game yet!</h3>
-  <%= link_to "Find a Game!", games_path, class: "btn btn-default btn-lg"%> or
-  <%= link_to "Create Your Own!", new_game_path, class: "btn btn-default btn-lg"%>
+  <br>
+  <p class="lg"> <%= link_to "Find a Game!", games_path, class: "btn btn-default btn-lg"%> or
+      <%= link_to "Create Your Own!", new_game_path, class: "btn btn-default btn-lg"%>
+  </p>
 </div>

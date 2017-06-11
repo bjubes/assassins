@@ -1,8 +1,6 @@
 TODO:
-- git bisect to find when jquery broke
-- fix creating game not changing user.game_id
-
-- assuming vicitm and target teams in kill and kill confirmation frontend
+- accepting or denying team request should have modal confirmation
+- assumes that victim and target teams exist in kill and kill confirmation frontend
 
 - require that user has a team before going to team_request#new
 - fix current_user being assumed in /teams
